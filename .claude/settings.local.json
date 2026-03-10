@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm lint:*)",
+      "Bash(npm info:*)",
+      "Bash(node --input-type=module -e \":*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm remove:*)"
+    ]
+  }
+}
