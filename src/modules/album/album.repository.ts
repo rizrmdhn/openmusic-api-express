@@ -10,7 +10,12 @@ export async function createAlbum(db: DBorTx, data: CreateAlbumDto) {
 }
 
 export async function findAlbumById(db: DBorTx, id: string) {
-  const [album] = await db.select().from(albums).where(eq(albums.id, id));
+  const album = await db.query.albums.findFirst({
+    where: eq(albums.id, id),
+    with: {
+      songs: true,
+    },
+  });
 
   return album;
 }

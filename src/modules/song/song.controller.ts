@@ -8,9 +8,10 @@ import {
   getSongById,
   getSongs,
 } from './song.service';
+import { SearchSongsDto } from './song.schema';
 
 export async function getSongsHandler(req: Request, res: Response) {
-  const songs = await getSongs(db);
+  const songs = await getSongs(db, req.query as SearchSongsDto);
   sendSuccess(res, {
     songs: songs,
   });

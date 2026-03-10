@@ -1,7 +1,7 @@
 import { DBorTx } from '@/config/database';
-import { CreateSongDto, UpdateSongDto } from './song.schema';
+import { CreateSongDto, SearchSongsDto, UpdateSongDto } from './song.schema';
 import { songs } from './song.table';
-import { eq } from 'drizzle-orm';
+import { and, eq, ilike } from 'drizzle-orm';
 
 export async function createSong(db: DBorTx, data: CreateSongDto) {
   const [song] = await db.insert(songs).values(data).returning();
@@ -9,8 +9,21 @@ export async function createSong(db: DBorTx, data: CreateSongDto) {
   return song;
 }
 
-export async function findSongs(db: DBorTx) {
-  const songsList = await db.select().from(songs);
+export async function findSongs(db: DBorTx, search: SearchSongsDto) {
+  console.log('search', search);
+  const songsList = await db.query.songs.findMany({
+    columns: {
+      id: true,
+      title: true,
+      performer: true,
+    },
+    where: and(
+      search.title ? ilike(songs.title, `%${search.title}%`) : undefined,
+      search.performer
+        ? ilike(songs.performer, `%${search.performer}%`)
+        : undefined
+    ),
+  });
 
   return songsList;
 }

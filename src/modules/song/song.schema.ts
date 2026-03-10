@@ -4,6 +4,13 @@ export const songParamsSchema = z.object({
   id: z.uuidv7(),
 });
 
+export const searchSongsSchema = z.object({
+  title: z.string().optional(),
+  performer: z.string().optional(),
+});
+
+export type SearchSongsDto = z.infer<typeof searchSongsSchema>;
+
 export const createSongSchema = z.object({
   title: z.string().min(1),
   year: z

@@ -6,11 +6,11 @@ import {
   findSongs,
   updateSong,
 } from './song.repository';
-import { CreateSongDto, UpdateSongDto } from './song.schema';
+import { CreateSongDto, SearchSongsDto, UpdateSongDto } from './song.schema';
 import { ApiError } from '@/utils/ApiError';
 
-export async function getSongs(db: DBorTx) {
-  const songs = await findSongs(db);
+export async function getSongs(db: DBorTx, search: SearchSongsDto) {
+  const songs = await findSongs(db, search);
 
   return songs;
 }

@@ -10,13 +10,20 @@ import { asyncHandler } from '@/utils/asyncHandler';
 import { validate } from '@/middleware/validate.middleware';
 import {
   createSongSchema,
+  searchSongsSchema,
   songParamsSchema,
   updateSongSchema,
 } from './song.schema';
 
 const router: ExpressRouter = Router();
 
-router.get('/', asyncHandler(getSongsHandler));
+router.get(
+  '/',
+  validate({
+    query: searchSongsSchema,
+  }),
+  asyncHandler(getSongsHandler)
+);
 router.get(
   '/:id',
   validate({

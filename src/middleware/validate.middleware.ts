@@ -13,7 +13,12 @@ export function validate(schemas: {
         req.params = schemas.params.parse(req.params) as typeof req.params;
       }
       if (schemas.query) {
-        req.query = schemas.query.parse(req.query) as typeof req.query;
+        const parsedQuery = schemas.query.parse(req.query);
+        Object.defineProperty(req, 'query', {
+          value: parsedQuery,
+          writable: true,
+          configurable: true,
+        });
       }
       if (schemas.body) {
         req.body = schemas.body.parse(req.body);
