@@ -27,7 +27,7 @@ export const sendError = (
   options: {
     message?: string;
     statusCode?: number;
-    errors?: Record<string, string[]>;
+    errors?: Record<string, unknown>;
     stack?: string;
   } = {}
 ) => {

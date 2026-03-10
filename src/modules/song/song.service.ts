@@ -1,4 +1,4 @@
-import { DBorTx } from '@/config/database';
+import type { DBorTx } from '@/config/database';
 import {
   createSong,
   deleteSong,
@@ -6,7 +6,11 @@ import {
   findSongs,
   updateSong,
 } from './song.repository';
-import { CreateSongDto, SearchSongsDto, UpdateSongDto } from './song.schema';
+import type {
+  CreateSongDto,
+  SearchSongsDto,
+  UpdateSongDto,
+} from './song.schema';
 import { ApiError } from '@/utils/ApiError';
 
 export async function getSongs(db: DBorTx, search: SearchSongsDto) {

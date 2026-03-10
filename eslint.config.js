@@ -13,10 +13,17 @@ const compat = new FlatCompat({
 export default defineConfig(
   globalIgnores(["dist/**", "node_modules/**"]),
   js.configs.recommended,
-  ...compat.extends("airbnb-base"),
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    extends: [...compat.extends("airbnb-base")],
+  },
   {
     files: ["**/*.ts"],
-    extends: [tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
+    extends: [
+      ...compat.extends("airbnb-base"),
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
     plugins: { unicorn },
     languageOptions: {
       parserOptions: {

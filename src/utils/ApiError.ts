@@ -1,11 +1,11 @@
 export class ApiError extends Error {
   public readonly statusCode: number;
 
-  public readonly errors?: unknown;
+  public readonly errors?: Record<string, unknown>;
 
   public readonly isOperational: boolean;
 
-  constructor(statusCode: number, message: string, errors?: unknown) {
+  constructor(statusCode: number, message: string, errors?: Record<string, unknown>) {
     super(message);
     this.statusCode = statusCode;
     this.errors = errors;
@@ -14,7 +14,7 @@ export class ApiError extends Error {
   }
 
   // Convenience static factories
-  static badRequest(message: string, errors?: unknown) {
+  static badRequest(message: string, errors?: Record<string, unknown>) {
     return new ApiError(400, message, errors);
   }
 
