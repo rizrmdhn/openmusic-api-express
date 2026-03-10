@@ -32,7 +32,7 @@ export const errorMiddleware = (
   }
 
   // Unknown / programmer errors — don't leak details
-  console.error('[Unhandled Error]', err);
+  // console.error('[Unhandled Error]', err);
   sendError(res, {
     statusCode: 500,
     message: 'Internal server error',

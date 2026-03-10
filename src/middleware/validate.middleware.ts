@@ -26,7 +26,7 @@ export function validate(schemas: {
       next();
     } catch (err) {
       if (err instanceof ZodError) {
-        console.log(z.flattenError(err));
+        // console.log(z.flattenError(err));
         next(ApiError.badRequest('Validation failed', z.flattenError(err)));
         return;
       }
