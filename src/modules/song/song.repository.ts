@@ -10,7 +10,6 @@ export async function createSong(db: DBorTx, data: CreateSongDto) {
 }
 
 export async function findSongs(db: DBorTx, search: SearchSongsDto) {
-  console.log('search', search);
   const songsList = await db.query.songs.findMany({
     columns: {
       id: true,
